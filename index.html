@@ -6,262 +6,84 @@
     <title>Ramadan 2027 Countdown</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌙</text></svg>">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%); padding: 20px; }
         
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
-            padding: 20px;
-        }
+        .container { background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 20px; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4); text-align: center; max-width: 400px; width: 100%; aspect-ratio: 1 / 1; display: flex; flex-direction: column; justify-content: space-between; backdrop-filter: blur(10px); }
         
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 20px;  
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; 
-            backdrop-filter: blur(10px);
-        }
+        .icon { font-size: 40px; margin-bottom: 5px; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
         
-        .icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-            animation: float 3s ease-in-out infinite;
-        }
+        .main-title { font-size: 20px; font-weight: 700; background: linear-gradient(135deg, #1e3c72 0%, #7e22ce 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 2px; }
+        .subtitle { font-size: 12px; color: #666; margin-bottom: 10px; font-weight: 500; }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
+        .countdown-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 15px; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3); position: relative; overflow: hidden; }
+        .countdown-label { font-size: 11px; color: rgba(255, 255, 255, 0.9); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-weight: 600; }
         
-        .main-title {
-            font-size: 20px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #1e3c72 0%, #7e22ce 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 5px;
-        }
+        /* Grille 2 étages (3x2) */
+        .countdown-display { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .time-unit { display: flex; flex-direction: column; align-items: center; }
+        .time-value { font-size: 20px; font-weight: 800; color: white; line-height: 1; text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
+        .time-label { font-size: 10px; color: rgba(255, 255, 255, 0.9); margin-top: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         
-        .subtitle {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-        
-        .countdown-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            padding: 20px 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .countdown-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-            animation: shine 3s infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        
-        .countdown-label {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.9);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .countdown-display {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .time-unit {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .time-value {
-            font-size: 20px;
-            font-weight: 800;
-            color: white;
-            line-height: 1;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .time-label {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.9);
-            margin-top: 5px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .info-box {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 12px;
-            padding: 12px;
-            margin-top: 15px;
-        }
-        
-        .info-text {
-            font-size: 12px;
-            color: #555;
-            font-weight: 500;
-        }
-        
-        .date-text {
-            font-size: 16px;
-            color: #1e3c72;
-            font-weight: 700;
-            margin-top: 5px;
-        }
-        
-        .time-detail {
-            font-size: 11px;
-            color: #777;
-            margin-top: 3px;
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .main-title {
-                font-size: 22px;
-            }
-            
-            .time-value {
-                font-size: 24px;
-            }
-            
-            .countdown-display {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+        .info-box { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 12px; padding: 12px; }
+        .info-text { font-size: 12px; color: #555; font-weight: 500; }
+        .date-text { font-size: 16px; color: #1e3c72; font-weight: 700; margin-top: 2px; }
+        .time-detail { font-size: 11px; color: #777; margin-top: 2px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="icon">🌙</div>
-        <div class="main-title">Ramadan 2026</div>
+        <div class="main-title">Ramadan 2027</div>
         <div class="subtitle">Countdown to the blessed month</div>
         
         <div class="countdown-box">
             <div class="countdown-label">Starting in</div>
-            <div class="countdown-display" id="countdown">
-                <div class="time-unit">
-                    <div class="time-value" id="months">-</div>
-                    <div class="time-label">Months</div>
-                </div>
-                <div class="time-unit">
-                    <div class="time-value" id="weeks">-</div>
-                    <div class="time-label">Weeks</div>
-                </div>
-                <div class="time-unit">
-                    <div class="time-value" id="days">-</div>
-                    <div class="time-label">Days</div>
-                </div>
-                <div class="time-unit">
-                    <div class="time-value" id="hours">-</div>
-                    <div class="time-label">Hours</div>
-                </div>
-                <div class="time-unit">
-                    <div class="time-value" id="minutes">-</div>
-                    <div class="time-label">Min</div>
-                </div>
-                <div class="time-unit">
-                    <div class="time-value" id="seconds">-</div>
-                    <div class="time-label">Sec</div>
-                </div>
+            <div class="countdown-display">
+                <div class="time-unit"><div class="time-value" id="months">-</div><div class="time-label">Months</div></div>
+                <div class="time-unit"><div class="time-value" id="weeks">-</div><div class="time-label">Weeks</div></div>
+                <div class="time-unit"><div class="time-value" id="days">-</div><div class="time-label">Days</div></div>
+                <div class="time-unit"><div class="time-value" id="hours">-</div><div class="time-label">Hours</div></div>
+                <div class="time-unit"><div class="time-value" id="minutes">-</div><div class="time-label">Min</div></div>
+                <div class="time-unit"><div class="time-value" id="seconds">-</div><div class="time-label">Sec</div></div>
             </div>
         </div>
         
         <div class="info-box">
             <div class="info-text">Estimated start date</div>
             <div class="date-text">February 7-8, 2027</div> 
-            <div class="time-detail">at Maghreb (~5:30 PM) - Subject to moon sighting</div>
+            <div class="time-detail">at Maghreb - Subject to moon sighting</div>
         </div>
     </div>
 
     <script>
-        var ramadanDate = new Date('2027-02-7T17:30:00');  
+        var ramadanDate = new Date('2027-02-07T17:30:00');  
         
         function updateCountdown() {
             var now = new Date();
             var difference = ramadanDate - now;
     
-        if (difference <= 0) {
-            document.getElementById('months').textContent = '0';
-            document.getElementById('weeks').textContent = '0';
-            document.getElementById('days').textContent = '0';
-            document.getElementById('hours').textContent = '0';
-            document.getElementById('minutes').textContent = '0';
-            document.getElementById('seconds').textContent = '0';
-        return;
-        }
+            if (difference <= 0) {
+                document.querySelectorAll('.time-value').forEach(el => el.textContent = '0');
+                return;
+            }
             
             var totalSeconds = Math.floor(difference / 1000);
             var totalMinutes = Math.floor(totalSeconds / 60);
             var totalHours = Math.floor(totalMinutes / 60);
             var totalDays = Math.floor(totalHours / 24);
     
-            var months = Math.floor(totalDays / 30);
-            var remainingAfterMonths = totalDays % 30;
-    
-            var weeks = Math.floor(remainingAfterMonths / 7);
-            var days = remainingAfterMonths % 7;
-    
-            var hours = totalHours % 24;
-            var minutes = totalMinutes % 60;  // ← Nouveau
-            var seconds = totalSeconds % 60;  // ← Nouveau
-            
-            document.getElementById('months').textContent = months;
-            document.getElementById('weeks').textContent = weeks;
-            document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = hours;
-            document.getElementById('minutes').textContent = minutes;
-            document.getElementById('seconds').textContent = seconds;
+            document.getElementById('months').textContent = Math.floor(totalDays / 30);
+            document.getElementById('weeks').textContent = Math.floor((totalDays % 30) / 7);
+            document.getElementById('days').textContent = totalDays % 7;
+            document.getElementById('hours').textContent = totalHours % 24;
+            document.getElementById('minutes').textContent = totalMinutes % 60;
+            document.getElementById('seconds').textContent = totalSeconds % 60;
         }
         
-        updateCountdown();
-        
         setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 </body>
 </html>

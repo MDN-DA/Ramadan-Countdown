@@ -5,7 +5,7 @@ A beautiful, responsive countdown timer for Ramadan 2027.
 **Live Demo:** [View Widget](https://mdn-da.github.io/Ramadan-2026/)
 ### Features:
 ✨ Real-time countdown (Months, Weeks, Days, Hours, Minutes, Seconds)  
-📅 Estimated start: February 17-18, 2026  
+📅 Estimated start: February 7-8, 2027  
 📱 Fully responsive design  
 🎨 Modern gradient interface  
 🆓 Free to use - No login required
